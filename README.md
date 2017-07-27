@@ -8,27 +8,27 @@ MicroXML is a very lightweight C++ dependence-free XML parsing librairy.
 
 Giving the following XML file named test : 
 
-```
+```xml
 <Zombie>
-	<Texture>
-		<Filename>
-			"zombie_texture.png  et plus encore"
-		</Filename>
-		<Size>
-			<Width>800</Width>
-			<Height>650</Height>
-		</Size>
-	</Texture>
+  <Texture>
+    <Filename>
+    "zombie_texture.png  et plus encore"
+  </Filename>
+    <Size>
+      <Width>800</Width>
+      <Height>650</Height>
+    </Size>
+  </Texture>
 </Zombie>
 <Hunter>
-	<Texture>
-		<Filename>
-		</Filename>
-		<Size>
-			<Width>1500</Width>
-			<Height>800</Height>
-		</Size>
-	</Texture>
+  <Texture>
+    <Filename>
+    </Filename>
+    <Size>
+      <Width>1500</Width>
+      <Height>800</Height>
+    </Size>
+  </Texture>
 </Hunter>
 ```
 
