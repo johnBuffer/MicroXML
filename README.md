@@ -48,8 +48,9 @@ As you can see, access requests are simple but still long to write.
 MicroXML provides an easier way to write this request using strings -> based on the Scalpl project (https://github.com/ducdetronquito/scalpl) :+1: :+1: :+1:
 
 ```c++
+int width, heigth;
 // Same request using parenthesis
-int width = root("Zombie.Texture.Size.Width").asInt(); 
+width = root("Zombie.Texture.Size.Width").asInt(); 
 
 // You can combine both
 width = root("Zombie.Texture")("Size.Width").asInt();
@@ -60,8 +61,10 @@ width = root("Zombie/Texture/Size", "/")["Width"].asInt();
 
 // Or change default separator
 root.setDefaultSeparator("/");
-width = root("Zombie/Texture/Size/Width").asInt() << std::endl;
+
+width      = root("Zombie/Texture/Size/Width").asInt() << std::endl;
 int height = root("Zombie/Texture/Size/Height").asInt() << std::endl;
+
 std::string filename = root("Zombie/Texture/Filename").asString() << std::endl;
 ```
 
