@@ -62,10 +62,10 @@ width = root("Zombie/Texture/Size", "/")["Width"].asInt();
 // Or change default separator
 root.setDefaultSeparator("/");
 
-width      = root("Zombie/Texture/Size/Width").asInt() << std::endl;
-int height = root("Zombie/Texture/Size/Height").asInt() << std::endl;
+width  = root("Zombie/Texture/Size/Width").asInt();
+height = root("Zombie/Texture/Size/Height").asInt();
 
-std::string filename = root("Zombie/Texture/Filename").asString() << std::endl;
+std::string filename = root("Zombie/Texture/Filename").asString();
 ```
 
 ## Limitations
