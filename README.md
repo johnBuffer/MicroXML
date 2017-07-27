@@ -34,7 +34,7 @@ Giving the following XML file named test :
 
 MicroXML is able to read it and allows you to easily access its contents.
 
-For exemple, to retrieve the height of the Zombie's texture you just need these lines :
+For instance, these few lines are all you need to retrieve the width of the of the Zombie's texture :
 
 ```c++
 // First parse the file
