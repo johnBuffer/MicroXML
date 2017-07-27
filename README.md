@@ -60,5 +60,5 @@ std::cout << root("Zombie/Texture/Size", "/")["Width"].asInt() << std::endl;
 ```
 
 ## Limitations
-Currently, MicroXML doesn't supports attributes in Tags declaration.
-MicroXML doesn't tell you if your request isn't valid, it just crash :poop:
+- Currently, MicroXML doesn't supports attributes in Tags declaration.
+- MicroXML doesn't tell you if your request isn't valid, it just crash :poop:
