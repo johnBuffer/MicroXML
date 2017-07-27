@@ -12,7 +12,7 @@ Giving the following XML file named test :
 <Zombie>
   <Texture>
     <Filename>
-      "zombie_texture.png  et plus encore"
+      "zombie_texture.png"
     </Filename>
     <Size>
       <Width>800</Width>
@@ -41,7 +41,7 @@ For exemple, to retrieve the height of the Zombie's texture you just need these 
 NodeXML root = ParserXML::parse("test");
 
 // Access your data as an int
-int height = root["Zombie"]["Texture"]["Size"]["Width"].asInt();
+int width = root["Zombie"]["Texture"]["Size"]["Width"].asInt();
 ```
 
 As you can see, access requests are simple but still long to write.
@@ -49,14 +49,20 @@ MicroXML provides an easier way to write this request using strings -> based on 
 
 ```c++
 // Same request using parenthesis
-int height = root("Zombie.Texture.Size.Width").asInt(); 
+int width = root("Zombie.Texture.Size.Width").asInt(); 
 
 // You can combine both
-std::cout << root("Zombie.Texture")("Size.Width").asInt() << std::endl;
-std::cout << root("Zombie.Texture.Size")["Width"].asInt() << std::endl;
+width = root("Zombie.Texture")("Size.Width").asInt();
+width = root("Zombie.Texture.Size")["Width"].asInt();
 
 // And choose your own separator dependng on your needs
-std::cout << root("Zombie/Texture/Size", "/")["Width"].asInt() << std::endl;
+width = root("Zombie/Texture/Size", "/")["Width"].asInt();
+
+// Or change default separator
+root.setDefaultSeparator("/");
+width = root("Zombie/Texture/Size/Width").asInt() << std::endl;
+int height = root("Zombie/Texture/Size/Height").asInt() << std::endl;
+std::string filename = root("Zombie/Texture/Filename").asString() << std::endl;
 ```
 
 ## Limitations
