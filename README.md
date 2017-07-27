@@ -12,8 +12,8 @@ Giving the following XML file named test :
 <Zombie>
   <Texture>
     <Filename>
-    "zombie_texture.png  et plus encore"
-  </Filename>
+      "zombie_texture.png  et plus encore"
+    </Filename>
     <Size>
       <Width>800</Width>
       <Height>650</Height>
