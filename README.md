@@ -44,22 +44,22 @@ NodeXML root = ParserXML::parse("test");
 int width = root["Zombie"]["Texture"]["Size"]["Width"].asInt();
 ```
 
-As you can see, access requests are simple but still long to write.
+As you can see, access requests are simple but still tedious to write.
 MicroXML provides an easier way to write this request using strings -> based on the Scalpl project (https://github.com/ducdetronquito/scalpl) :+1: :+1: :+1:
 
 ```c++
 int width, heigth;
-// Same request using parenthesis
+// Same request using brackets
 width = root("Zombie.Texture.Size.Width").asInt(); 
 
 // You can combine both
-width = root("Zombie.Texture")("Size.Width").asInt();
 width = root("Zombie.Texture.Size")["Width"].asInt();
+width = root("Zombie.Texture")("Size.Width").asInt();
 
-// And choose your own separator dependng on your needs
+// You may also use your own separator depending on the punctuation you have already used
 width = root("Zombie/Texture/Size", "/")["Width"].asInt();
 
-// Or change default separator
+// Or change the default separator
 root.setDefaultSeparator("/");
 
 width  = root("Zombie/Texture/Size/Width").asInt();
@@ -69,5 +69,5 @@ std::string filename = root("Zombie/Texture/Filename").asString();
 ```
 
 ## Limitations
-- Currently, MicroXML doesn't supports attributes in Tags declaration.
-- MicroXML doesn't tell you if your request isn't valid, it just crash :poop:
+- Currently MicroXML doesn't support attributes in tag declaration.
+- MicroXML doesn't issue a warning in case of invalid request, it just crashes :poop:
