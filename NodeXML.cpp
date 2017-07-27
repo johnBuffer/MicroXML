@@ -5,12 +5,14 @@
 NodeXML::NodeXML() :
     _name(""),
     _data(""),
+    _defaultSeparator("."),
     _topNode(nullptr)
 {}
 
 NodeXML::NodeXML(std::string name) :
     _name(name),
     _data(""),
+    _defaultSeparator("."),
     _topNode(nullptr)
 {}
 
@@ -19,15 +21,25 @@ void NodeXML::setData(std::string data)
     _data = data;
 }
 
-void NodeXML::addNode(std::string name)
+void NodeXML::addSubNode(std::string name)
 {
     _subNodes[name] = NodeXML(name);
     _subNodes[name]._topNode = this;
 }
 
+void NodeXML::setDefaultSeparator(std::string sep)
+{
+    _defaultSeparator = sep;
+}
+
 NodeXML& NodeXML::operator[](std::string name)
 {
     return _subNodes[name];
+}
+
+NodeXML& NodeXML::operator()(std::string path)
+{
+    return this->operator()(path, _defaultSeparator);
 }
 
 NodeXML& NodeXML::operator()(std::string path, std::string sep)

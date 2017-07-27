@@ -9,7 +9,7 @@ NodeXML ParserXML::parse(std::string filename)
 {
     NodeXML newNode("Root");
 
-    std::ifstream infile("test");
+    std::ifstream infile(filename);
     std::list<NodeXML*> stack;
 
     std::string str;
@@ -35,7 +35,7 @@ NodeXML ParserXML::parse(std::string filename)
         }
         else
         {
-            stack.back()->addNode(tag._name);
+            stack.back()->addSubNode(tag._name);
             stack.push_back(&(*stack.back())[tag._name]);
         }
 

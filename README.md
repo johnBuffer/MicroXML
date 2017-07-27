@@ -48,7 +48,7 @@ As you can see, access requests are simple but still long to write.
 MicroXML provides an easier way to write this request using strings -> based on the Scalpl project (https://github.com/ducdetronquito/scalpl) :+1: :+1: :+1:
 
 ```c++
-// Same request
+// Same request using parenthesis
 int height = root("Zombie.Texture.Size.Width").asInt(); 
 
 // You can combine both

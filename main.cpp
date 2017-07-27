@@ -14,5 +14,8 @@ int main()
     std::cout << root("Zombie.Texture.Size")["Width"].asInt() << std::endl;
     std::cout << root("Zombie/Texture/Size", "/")["Width"].asInt() << std::endl;
 
+    root.setDefaultSeparator("/");
+    std::cout << root("Zombie/Texture/Size/Width").asInt() << std::endl;
+
     return 0;
 }
