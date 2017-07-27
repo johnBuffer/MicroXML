@@ -2,7 +2,7 @@
 
 ## Description
 
-MicroXML is a very lightweight C++ dependence-free XML parsing librairy.
+MicroXML is a very lightweight (but strong :ant:) C++ dependence-free XML parsing librairy.
 
 ## Exemple
 
