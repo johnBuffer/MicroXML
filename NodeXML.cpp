@@ -26,10 +26,12 @@ void NodeXML::setParams(const std::map<std::string, std::string>& params)
     _params = params;
 }
 
-void NodeXML::addSubNode(std::string name)
+NodeXML* NodeXML::addSubNode(std::string name)
 {
-    _subNodes[name] = NodeXML(name);
-    _subNodes[name]._topNode = this;
+    _subNodes._set.push_back(new NodeXML(name));
+    _subNodes._set.back()->_topNode = this;
+
+    return _subNodes._set.back();
 }
 
 void NodeXML::setDefaultSeparator(std::string sep)
@@ -37,27 +39,25 @@ void NodeXML::setDefaultSeparator(std::string sep)
     _defaultSeparator = sep;
 }
 
-NodeXML& NodeXML::operator[](std::string name)
+NodeSet NodeXML::operator[](std::string name)
 {
-    return _subNodes[name];
+    NodeSet result;
+    result.addNode(this);
+    return result[name];
 }
 
-NodeXML& NodeXML::operator()(std::string path)
+NodeSet NodeXML::operator()(std::string path)
 {
-    return this->operator()(path, _defaultSeparator);
+    NodeSet result;
+    result.addNode(this);
+    return result(path, _defaultSeparator);
 }
 
-NodeXML& NodeXML::operator()(std::string path, std::string sep)
+NodeSet NodeXML::operator()(std::string path, std::string sep)
 {
-    std::vector<std::string> nodes = split(path, sep);
-
-    NodeXML* currentNode = this;
-    for (const std::string& name : nodes)
-    {
-        currentNode = &(*currentNode)[name];
-    }
-
-    return *currentNode;
+    NodeSet result;
+    result.addNode(this);
+    return result(path, sep);
 }
 
 std::string NodeXML::getName() const
@@ -65,14 +65,9 @@ std::string NodeXML::getName() const
     return _name;
 }
 
-std::vector<NodeXML*> NodeXML::getSubNodes()
+NodeSet& NodeXML::getNodeSet()
 {
-    std::vector<NodeXML*> result;
-
-    for (auto& node : _subNodes)
-        result.push_back(&node.second);
-
-    return result;
+    return _subNodes;
 }
 
 void NodeXML::print() const
@@ -87,9 +82,9 @@ void NodeXML::print(std::string indent) const
         std::cout << " -> " << _data;
     std::cout << std::endl;
 
-    for (auto& node : _subNodes)
+    for (auto& node : _subNodes._set)
     {
-        node.second.print(indent+"  ");
+        node->print(indent+"  ");
     }
     std::cout << indent << "-"+_name << std::endl;
 }

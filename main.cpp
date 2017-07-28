@@ -3,30 +3,15 @@
 
 int main()
 {
+    //NodeXML root = ParserXML::parse("c:/standard");
     NodeXML root = ParserXML::parse("test");
 
-    root.print();
+    NodeSet authors = root("catalog.book");
 
-    /// Thx scalpl ;)
-    std::cout << std::endl;
-    std::cout << root["Zombie"]["Texture"]["Size"]["Width"].asInt() << std::endl;
-    std::cout << root("Zombie.Texture.Size.Width").asInt() << std::endl;
-    std::cout << root("Zombie.Texture")("Size.Width").asInt() << std::endl;
-    std::cout << root("Zombie.Texture.Size")["Width"].asInt() << std::endl;
-    std::cout << root("Zombie/Texture/Size", "/")["Width"].asInt() << std::endl;
-
-    root.setDefaultSeparator("/");
-    std::cout << root("Zombie/Texture/Size/Width").asInt() << std::endl;
-    std::cout << root("Zombie/Texture").get("quality") << std::endl;
-    std::cout << root("Zombie/Texture").get("format") << std::endl;
-
-
-
-    /*std::string test = "    ok ceci     est un    \"test de ouf\"";
-    auto v = splitQuote(test, ' ');
-
-    for (auto s : v)
-        std::cout << "|" << s << "|" << std::endl;*/
+    for (NodeXML* node : authors())
+    {
+        std::cout << node->get("id") << std::endl;
+    }
 
     return 0;
 }

@@ -13,14 +13,10 @@ NodeXML ParserXML::parse(std::string filename)
     std::list<NodeXML*> stack;
 
     std::string str, line;
-    while (std::getline(infile, line))
-    {
-        str += line;
-    }
+    while (std::getline(infile, line)) {str += line;}
     str = purge(str);
 
     stack.push_back(&newNode);
-
     Tag tag = getNextTag(str);
     while (tag._isValid)
     {
@@ -34,12 +30,12 @@ NodeXML ParserXML::parse(std::string filename)
         }
         else
         {
-            stack.back()->addSubNode(tag._name);
-            stack.push_back(&(*stack.back())[tag._name]);
-            stack.back()->setParams(tag._params);
+            NodeXML* newNode = stack.back()->addSubNode(tag._name);
+            stack.push_back(newNode);
+            newNode->setParams(tag._params);
         }
 
-        tag = getNextTag(str);
+        tag = getNextTag(str, tag._pos+1);
     }
 
     return newNode;

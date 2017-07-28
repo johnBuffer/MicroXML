@@ -17,6 +17,7 @@ struct Tag
     std::map<std::string, std::string> _params;
 
     TagType _type;
+    size_t  _pos;
     bool    _isValid;
 };
 

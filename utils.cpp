@@ -5,6 +5,18 @@ bool found(size_t pos)
     return pos != std::string::npos;
 }
 
+size_t findFirst(const std::string& str, char c, size_t start)
+{
+    size_t strSize = str.size();
+    for (size_t i(start); i<strSize; ++i)
+    {
+        if (str[i] == c)
+            return i;
+    }
+
+    return std::string::npos;
+}
+
 std::string purge(std::string& str)
 {
     std::string result = "";
@@ -60,12 +72,12 @@ void parseDeclaration(const std::string& str, Tag& tag)
     tag._name = tag_name;
 }
 
-Tag getNextTag(std::string& str)
+Tag getNextTag(std::string& str, size_t start)
 {
     Tag tag;
 
-    size_t pos1 = str.find('<');
-    size_t pos2 = str.find('>');
+    size_t pos1 = findFirst(str, '<', start);
+    size_t pos2 = findFirst(str, '>', pos1);
     if (found(pos1) && found(pos2))
     {
         size_t length = pos2-pos1-1;
@@ -75,12 +87,11 @@ Tag getNextTag(std::string& str)
 
         if (tag._type == CLOSE)
         {
-            tag._data = str.substr(0, pos1);
+            tag._data = str.substr(start, pos1-start);
         }
 
-        str = str.substr(pos2+1);
-
         tag._isValid = true;
+        tag._pos     = pos2;
     }
     else
         tag._isValid = false;

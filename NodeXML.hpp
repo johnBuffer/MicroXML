@@ -4,7 +4,10 @@
 #include <string>
 #include <map>
 #include <vector>
+#include <list>
 #include <iostream>
+
+#include "NodeSet.hpp"
 
 class NodeXML
 {
@@ -15,15 +18,15 @@ public:
     void print() const;
     void setData(std::string data);
     void setParams(const std::map<std::string, std::string>& params);
-    void addSubNode(std::string name);
     void setDefaultSeparator(std::string sep);
 
-    std::string           getName()     const;
-    NodeXML&              operator[](std::string nodeName);
-    NodeXML&              operator()(std::string path);
-    NodeXML&              operator()(std::string path, std::string sep);
-    std::vector<NodeXML*> getSubNodes();
-    std::string           get(const std::string& param) const;
+    NodeXML*    addSubNode(std::string name);
+    NodeSet     operator[](std::string nodeName);
+    NodeSet     operator()(std::string path);
+    NodeSet     operator()(std::string path, std::string sep);
+    std::string getName() const;
+    std::string get(const std::string& param) const;
+    NodeSet&    getNodeSet();
 
     int asInt()            const;
     double asDouble()      const;
@@ -35,7 +38,7 @@ private:
     std::string _defaultSeparator;
     NodeXML*    _topNode;
 
-    std::map<std::string, NodeXML> _subNodes;
+    NodeSet _subNodes;
     std::map<std::string, std::string> _params;
 
     void print(std::string indent) const;
