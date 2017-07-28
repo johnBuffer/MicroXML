@@ -6,30 +6,41 @@ MicroXML is a very lightweight (but strong :ant:) C++ dependence-free XML parsin
 
 ## Exemple
 
-Giving the following XML file named test : 
+Giving the following XML file named books.xml (from https://msdn.microsoft.com/en-us/library/ms762271(v=vs.85).aspx) : 
 
 ```xml
-<Zombie>
-  <Texture>
-    <Filename>
-      "zombie_texture.png"
-    </Filename>
-    <Size>
-      <Width>800</Width>
-      <Height>650</Height>
-    </Size>
-  </Texture>
-</Zombie>
-<Hunter>
-  <Texture>
-    <Filename>
-    </Filename>
-    <Size>
-      <Width>1500</Width>
-      <Height>800</Height>
-    </Size>
-  </Texture>
-</Hunter>
+<?xml version="1.0" encoding="UTF-8"?>
+<catalog>
+   <book id="bk101">
+      <author>Gambardella, Matthew</author>
+      <title>XML Developer's Guide</title>
+      <genre>Computer</genre>
+      <price>44.95</price>
+      <publish_date>2000-10-01</publish_date>
+      <description>An in-depth look at creating applications 
+      with XML.</description>
+   </book>
+   <book id="bk102">
+      <author>Ralls, Kim</author>
+      <title>Midnight Rain</title>
+      <genre>Fantasy</genre>
+      <price>5.95</price>
+      <publish_date>2000-12-16</publish_date>
+      <description>A former architect battles corporate zombies, 
+      an evil sorceress, and her own childhood to become queen 
+      of the world.</description>
+   </book>
+   <book id="bk103">
+      <author>Corets, Eva</author>
+      <title>Maeve Ascendant</title>
+      <genre>Fantasy</genre>
+      <price>5.95</price>
+      <publish_date>2000-11-17</publish_date>
+      <description>After the collapse of a nanotechnology 
+      society in England, the young survivors lay the 
+      foundation for a new society.</description>
+   </book>
+</catalog>
 ```
 
 MicroXML is able to read it and allows you to easily access its contents.
