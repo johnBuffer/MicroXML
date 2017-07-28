@@ -1,17 +1,27 @@
+#include <MicroXML/MicroXML.hpp>
 #include <MicroXML/NodeSet.hpp>
 #include <MicroXML/NodeXML.hpp>
-#include <MicroXML/utils.hpp>
+
+NodeSet NodePtr::operator()(const std::string& name)
+{
+     return (*_node)(name);
+}
+
+std::string NodePtr::operator[](const std::string& attr)
+{
+     return (*_node)[attr];
+}
 
 NodeXML& NodeSet::operator[](int i)
 {
-    return *_set[i];
+    return *(_set[i]._node);
 }
 
 NodeSet NodeSet::find(const std::string& name)
 {
     NodeSet result;
 
-    for (NodeXML* node : _set)
+    for (NodePtr node : _set)
     {
         if (node->getName().compare(name) == 0)
             result._set.push_back(node);
@@ -20,11 +30,23 @@ NodeSet NodeSet::find(const std::string& name)
     return result;
 }
 
-NodeSet NodeSet::operator[](const std::string& name)
+StrVec NodeSet::operator[](const std::string& attr)
+{
+    StrVec result;
+
+    for (NodePtr node : _set)
+    {
+        result.push_back(node[attr]);
+    }
+
+    return result;
+}
+
+NodeSet NodeSet::_findNodesByName(const std::string& name)
 {
     NodeSet result;
 
-    for (NodeXML* node : _set)
+    for (NodePtr node : _set)
     {
         result.addNodeSet(node->getNodeSet().find(name));
     }
@@ -32,7 +54,12 @@ NodeSet NodeSet::operator[](const std::string& name)
     return result;
 }
 
-NodeSet NodeSet::operator()(std::string& path, const std::string& sep)
+NodeSet NodeSet::operator()(const std::string& path)
+{
+    return this->operator()(path, MicroXML::getDefaultSeparator());
+}
+
+NodeSet NodeSet::operator()(const std::string& path, const std::string& sep)
 {
     std::vector<std::string> nodes = split(path, sep);
 
@@ -40,36 +67,36 @@ NodeSet NodeSet::operator()(std::string& path, const std::string& sep)
     NodeSet* currentSet = this;
     for (const std::string& name : nodes)
     {
-        result = (*currentSet)[name];
+        result = currentSet->_findNodesByName(name);
         currentSet = &result;
     }
 
     return result;
 }
 
-std::vector<NodeXML*>& NodeSet::operator()()
+std::vector<NodePtr>& NodeSet::operator()()
 {
     return _set;
 }
 
-std::vector<NodeXML*>::iterator NodeSet::begin()
+std::vector<NodePtr>::iterator NodeSet::begin()
 {
     return _set.begin();
 }
 
-std::vector<NodeXML*>::iterator NodeSet::end()
+std::vector<NodePtr>::iterator NodeSet::end()
 {
     return _set.end();
 }
 
 void NodeSet::addNode(NodeXML* node)
 {
-    _set.push_back(node);
+    _set.push_back(NodePtr(*node));
 }
 
 void NodeSet::addNodeSet(const NodeSet& nodeSet)
 {
-    for (NodeXML* node : nodeSet._set)
+    for (NodePtr node : nodeSet._set)
     {
         _set.push_back(node);
     }
@@ -77,7 +104,7 @@ void NodeSet::addNodeSet(const NodeSet& nodeSet)
 
 void NodeSet::print() const
 {
-    for (NodeXML* node : _set)
+    for (NodePtr node : _set)
     {
         node->print();
     }

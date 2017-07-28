@@ -2,11 +2,11 @@
 
 ## Description
 
-MicroXML is a very lightweight (but strong :ant:) C++ dependence-free XML parsing librairy.
+MicroXML is a very lightweight (but strong:ant:) C++ dependence-free XML parsing librairy.
 
 ## Exemple
 
-Giving the following XML file named books.xml (from https://msdn.microsoft.com/en-us/library/ms762271(v=vs.85).aspx) : 
+Giving the following XML file named books.xml (from https://msdn.microsoft.com/en-us/library/ms762271(v=vs.85).aspx): 
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -45,40 +45,43 @@ Giving the following XML file named books.xml (from https://msdn.microsoft.com/e
 
 MicroXML is able to read it and allows you to easily access its contents.
 
-For instance, these few lines are all you need to retrieve all the authors mentioned in the file :
+For instance, these few lines are all you need to retrieve all the authors mentioned in the file:
 
 ```c++
 // First parse the file
 NodeXML root = MicroXML::parse("books.xml");
 
 // Access your data
-NodeSet authors = root["catalog"]["book"]["author"];
+NodeSet authors = root("catalog")("book")("author");
 
 // View the data
-for (auto node : authors)
+for (auto node: authors)
 {
 	std::cout << node->asString() << std::endl;
 }
 ```
-Output :
+Output:
 ```
 Gambardella, Matthew
 Ralls, Kim
 Corets, Eva
 ```
 
-
 As you can see, access requests are simple but still tedious to write.
-MicroXML provides an easier way to write this request using strings -> based on the Scalpl project (https://github.com/ducdetronquito/scalpl) :+1: :+1: :+1:
+MicroXML provides an easier way to write this request using strings -> based on the Scalpl project (https://github.com/ducdetronquito/scalpl):+1::+1::+1:
 
 ```c++
-int width, heigth;
 // Same request using brackets
-width = root("Zombie.Texture.Size.Width").asInt(); 
+NodeSet authorsBis = root("catalog.book.author");
+
+for (auto node : authorsBis)
+{
+	std::cout << node->asString() << std::endl;
+}
 
 // You can combine both
-width = root("Zombie.Texture.Size")["Width"].asInt();
-width = root("Zombie.Texture")("Size.Width").asInt();
+authorsBis = root("catalog.book")["author"];
+authorsBis = root("catalog.book")("author");
 
 // You may also use your own separator depending on the punctuation you have already used
 width = root("Zombie/Texture/Size", "/")["Width"].asInt();

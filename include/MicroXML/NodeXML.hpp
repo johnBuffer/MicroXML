@@ -20,16 +20,17 @@ public:
     void setData(std::string data);
     void setParams(const StrMap& params);
 
-    NodeXML*    addSubNode(std::string name);
-    NodeSet     operator[](std::string nodeName);
     NodeSet     operator()(std::string path);
     NodeSet     operator()(std::string path, const std::string& sep);
-    std::string getName() const;
-    std::string get(const std::string& param) const;
+    NodeXML*    addSubNode(std::string name);
     NodeSet&    getNodeSet();
 
-    int asInt()            const;
-    double asDouble()      const;
+    std::string operator[](std::string attr);
+    std::string  getName() const;
+    std::string  get(const std::string& param) const;
+
+    int         asInt()    const;
+    double      asDouble() const;
     std::string asString() const;
 
 private:

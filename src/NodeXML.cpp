@@ -26,17 +26,16 @@ void NodeXML::setParams(const std::map<std::string, std::string>& params)
 
 NodeXML* NodeXML::addSubNode(std::string name)
 {
-    _subNodes._set.push_back(new NodeXML(name));
-    _subNodes._set.back()->_topNode = this;
+    NodeXML* newNode = new NodeXML(name);
+    _subNodes.addNode(newNode);
+    newNode->_topNode = this;
 
-    return _subNodes._set.back();
+    return &(*_subNodes._set.back());
 }
 
-NodeSet NodeXML::operator[](std::string name)
+std::string NodeXML::operator[](std::string attr)
 {
-    NodeSet result;
-    result.addNode(this);
-    return result[name];
+    return get(attr);
 }
 
 NodeSet NodeXML::operator()(std::string path)
@@ -91,9 +90,11 @@ double NodeXML::asDouble() const
     return std::stod(_data);
 }
 
-std::string NodeXML::get(const std::string& param) const
+std::string NodeXML::get(const std::string& attr) const
 {
-    return _params.at(param);
+    if (_params.find(attr) != _params.end())
+        return _params.at(attr);
+    return "";
 }
 
 std::string NodeXML::asString() const
