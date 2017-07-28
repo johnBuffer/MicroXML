@@ -67,7 +67,3 @@ height = root("Zombie/Texture/Size/Height").asInt();
 
 std::string filename = root("Zombie/Texture/Filename").asString();
 ```
-
-## Limitations
-- [x] Currently MicroXML doesn't support attributes in tag declaration.
-- [x] MicroXML doesn't issue a warning in case of invalid request, it just crashes :poop:
