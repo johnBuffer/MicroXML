@@ -49,7 +49,7 @@ For instance, these few lines are all you need to retrieve all the authors menti
 
 ```c++
 // First parse the file
-NodeXML root = ParserXML::parse("books.xml");
+NodeXML root = MicroXML::parse("books.xml");
 
 // Access your data
 NodeSet authors = root["catalog"]["book"]["author"];
@@ -60,7 +60,7 @@ for (auto node : authors)
 	std::cout << node->asString() << std::endl;
 }
 ```
-
+Output :
 ```
 Gambardella, Matthew
 Ralls, Kim
