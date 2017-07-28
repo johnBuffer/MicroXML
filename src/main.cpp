@@ -2,15 +2,15 @@
 
 int main()
 {
-    MicroXML::setDefaultSeparator("/");
+    MicroXML::setDefaultSeparator(".");
     NodeXML root = MicroXML::parse("test.xml");
 
-    NodeSet authors   = root("catalog/book");
+    NodeSet authors   = root("catalog")("book/title", "/");
     NodeSet genresBis = root("catalog/book/author");
 
     for (auto node : authors)
     {
-        std::cout << node("title")[0].asString() << " (id " << node["id"] << ") written by " << node("author")[0].asString() << std::endl;
+        std::cout << node->asString() << std::endl;
     }
 
     std::cout << std::endl;

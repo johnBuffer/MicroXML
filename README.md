@@ -80,17 +80,13 @@ for (auto node : authorsBis)
 }
 
 // You can combine both
-authorsBis = root("catalog.book")["author"];
 authorsBis = root("catalog.book")("author");
 
 // You may also use your own separator depending on the punctuation you have already used
-width = root("Zombie/Texture/Size", "/")["Width"].asInt();
+authorsBis = root("catalog/book/author", "/");
 
 // Or change the default separator
-root.setDefaultSeparator("/");
+MicroXML::setDefaultSeparator("/");
 
-width  = root("Zombie/Texture/Size/Width").asInt();
-height = root("Zombie/Texture/Size/Height").asInt();
-
-std::string filename = root("Zombie/Texture/Filename").asString();
+authorsBis = root("catalog/book/author");
 ```
