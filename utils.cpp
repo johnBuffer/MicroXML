@@ -43,8 +43,8 @@ std::string purge(std::string& str)
 
 void parseDeclaration(const std::string& str, Tag& tag)
 {
-    std::vector<std::string> params = splitQuote(str, ' ');
-    std::string tag_name = params[0];
+    StrVec      params = splitQuote(str, ' ');
+    std::string tagName = params[0];
 
     size_t paramsSize = params.size();
     for (size_t i(1); i<paramsSize; ++i)
@@ -56,20 +56,20 @@ void parseDeclaration(const std::string& str, Tag& tag)
         tag._params[paramName] = paramData;
     }
 
-    if (tag_name[0] == '/')
+    if (tagName[0] == '/')
     {
         tag._type = CLOSE;
-        tag_name  = tag_name.substr(1);
+        tagName  = tagName.substr(1);
     }
-    else if (tag_name.back() == '/')
+    else if (tagName.back() == '/')
     {
         tag._type = AUTO_CLOSED;
-        tag_name  = tag_name.substr(0, str.size()-1);
+        tagName  = tagName.substr(0, str.size()-1);
     }
     else
         tag._type = OPEN;
 
-    tag._name = tag_name;
+    tag._name = tagName;
 }
 
 Tag getNextTag(std::string& str, size_t start)

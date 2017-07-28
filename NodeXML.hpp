@@ -8,6 +8,7 @@
 #include <iostream>
 
 #include "NodeSet.hpp"
+#include "utils.hpp"
 
 class NodeXML
 {
@@ -17,7 +18,7 @@ public:
 
     void print() const;
     void setData(std::string data);
-    void setParams(const std::map<std::string, std::string>& params);
+    void setParams(const StrMap& params);
     void setDefaultSeparator(std::string sep);
 
     NodeXML*    addSubNode(std::string name);
@@ -39,7 +40,7 @@ private:
     NodeXML*    _topNode;
 
     NodeSet _subNodes;
-    std::map<std::string, std::string> _params;
+    StrMap  _params;
 
     void print(std::string indent) const;
 };

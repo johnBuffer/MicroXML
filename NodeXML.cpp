@@ -1,6 +1,5 @@
 #include "NodeXML.hpp"
 #include <iostream>
-#include "utils.hpp"
 
 NodeXML::NodeXML() :
     _name(""),
@@ -83,9 +82,8 @@ void NodeXML::print(std::string indent) const
     std::cout << std::endl;
 
     for (auto& node : _subNodes._set)
-    {
         node->print(indent+"  ");
-    }
+
     std::cout << indent << "-"+_name << std::endl;
 }
 

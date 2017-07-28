@@ -3,15 +3,15 @@
 
 int main()
 {
-    //NodeXML root = ParserXML::parse("c:/standard");
-    NodeXML root = ParserXML::parse("test");
+    NodeXML root = ParserXML::parse("test.xml");
+    //NodeXML root = ParserXML::parse("test");
 
-    NodeSet authors = root("catalog.book");
+    //NodeSet authors = root("catalog.book");
 
-    for (NodeXML* node : authors())
+    /*for (NodeXML* node : authors())
     {
         std::cout << node->get("id") << std::endl;
-    }
+    }*/
 
     return 0;
 }

@@ -10,6 +10,12 @@ NodeXML ParserXML::parse(std::string filename)
     NodeXML newNode("Root");
 
     std::ifstream infile(filename);
+
+    if (!infile)
+    {
+        std::cerr << "[ERROR] cannot read file \"" << filename << "\"." << std::endl;
+    }
+
     std::list<NodeXML*> stack;
 
     std::string str, line;
