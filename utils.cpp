@@ -43,7 +43,7 @@ std::string purge(std::string& str)
 
 void parseDeclaration(const std::string& str, Tag& tag)
 {
-    StrVec      params = splitQuote(str, ' ');
+    StrVec      params  = splitQuote(str, ' ');
     std::string tagName = params[0];
 
     size_t paramsSize = params.size();
@@ -61,10 +61,17 @@ void parseDeclaration(const std::string& str, Tag& tag)
         tag._type = CLOSE;
         tagName  = tagName.substr(1);
     }
-    else if (tagName.back() == '/')
+    else if (str.back() == '/')
     {
         tag._type = AUTO_CLOSED;
-        tagName  = tagName.substr(0, str.size()-1);
+    }
+    else if (tagName.compare("?xml") == 0)
+    {
+        tag._type = SPECIAL;
+    }
+    else if (tagName.compare("!--") == 0)
+    {
+        tag._type = COMMENTED;
     }
     else
         tag._type = OPEN;
@@ -89,9 +96,13 @@ Tag getNextTag(std::string& str, size_t start)
         {
             tag._data = str.substr(start, pos1-start);
         }
+        else if (tag._type == COMMENTED)
+        {
+            pos2 = str.find("-->");
+        }
 
         tag._isValid = true;
-        tag._pos     = pos2;
+        tag._pos     = pos2+2;
     }
     else
         tag._isValid = false;

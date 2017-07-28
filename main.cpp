@@ -8,6 +8,8 @@ int main()
 
     //NodeSet authors = root("catalog.book");
 
+    root.print();
+
     /*for (NodeXML* node : authors())
     {
         std::cout << node->get("id") << std::endl;

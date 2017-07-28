@@ -13,6 +13,8 @@ enum TagType
 {
     OPEN,
     CLOSE,
+    SPECIAL,
+    COMMENTED,
     AUTO_CLOSED
 };
 

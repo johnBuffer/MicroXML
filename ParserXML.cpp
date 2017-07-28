@@ -10,19 +10,19 @@ NodeXML ParserXML::parse(std::string filename)
     NodeXML newNode("Root");
 
     std::ifstream infile(filename);
-
     if (!infile)
     {
         std::cerr << "[ERROR] cannot read file \"" << filename << "\"." << std::endl;
+        return newNode;
     }
 
     std::list<NodeXML*> stack;
+    stack.push_back(&newNode);
 
     std::string str, line;
     while (std::getline(infile, line)) {str += line;}
     str = purge(str);
 
-    stack.push_back(&newNode);
     Tag tag = getNextTag(str);
     while (tag._isValid)
     {
@@ -33,11 +33,16 @@ NodeXML ParserXML::parse(std::string filename)
                 stack.back()->setData(tag._data);
                 stack.pop_back();
             }
+            else
+            {
+                std::cout << "[WARNING] \"" << stack.back()->getName() << "\" not closed" << std::endl;
+            }
         }
-        else
+        else if (tag._type != COMMENTED)
         {
             NodeXML* newNode = stack.back()->addSubNode(tag._name);
-            stack.push_back(newNode);
+            if (tag._type == OPEN)
+                stack.push_back(newNode);
             newNode->setParams(tag._params);
         }
 
