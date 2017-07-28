@@ -69,5 +69,5 @@ std::string filename = root("Zombie/Texture/Filename").asString();
 ```
 
 ## Limitations
-- Currently MicroXML doesn't support attributes in tag declaration.
-- MicroXML doesn't issue a warning in case of invalid request, it just crashes :poop:
+[x] Currently MicroXML doesn't support attributes in tag declaration.
+[ ] MicroXML doesn't issue a warning in case of invalid request, it just crashes :poop:
