@@ -1,13 +1,12 @@
-#include "ParserXML.hpp"
+#include <MicroXML/MicroXML.hpp>
+#include <MicroXML/utils.hpp>
 #include <iostream>
 #include <fstream>
 #include <sstream>
 
-#include "utils.hpp"
+std::string MicroXML::_defaultSeparator = ".";
 
-std::string ParserXML::_defaultSeparator = ".";
-
-NodeXML ParserXML::parse(std::string filename)
+NodeXML MicroXML::parse(std::string filename)
 {
     NodeXML newNode("Root");
 
@@ -57,12 +56,12 @@ NodeXML ParserXML::parse(std::string filename)
     return newNode;
 }
 
-void ParserXML::setDefaultSeparator(const std::string& separator)
+void MicroXML::setDefaultSeparator(const std::string& separator)
 {
     _defaultSeparator = separator;
 }
 
-const std::string& ParserXML::getDefaultSeparator()
+const std::string& MicroXML::getDefaultSeparator()
 {
     return _defaultSeparator;
 }

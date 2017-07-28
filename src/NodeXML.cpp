@@ -1,5 +1,5 @@
-#include "NodeXML.hpp"
-#include "ParserXML.hpp"
+#include <MicroXML/NodeXML.hpp>
+#include <MicroXML/MicroXML.hpp>
 #include <iostream>
 
 NodeXML::NodeXML() :
@@ -43,7 +43,7 @@ NodeSet NodeXML::operator()(std::string path)
 {
     NodeSet result;
     result.addNode(this);
-    return result(path, ParserXML::getDefaultSeparator());
+    return result(path, MicroXML::getDefaultSeparator());
 }
 
 NodeSet NodeXML::operator()(std::string path, const std::string& sep)

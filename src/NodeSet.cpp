@@ -1,11 +1,10 @@
-#include "NodeSet.hpp"
-#include "NodeXML.hpp"
+#include <MicroXML/NodeSet.hpp>
+#include <MicroXML/NodeXML.hpp>
+#include <MicroXML/utils.hpp>
 
-#include "utils.hpp"
-
-NodeXML* NodeSet::operator[](int i)
+NodeXML& NodeSet::operator[](int i)
 {
-    return _set[i];
+    return *_set[i];
 }
 
 NodeSet NodeSet::find(const std::string& name)
@@ -51,6 +50,16 @@ NodeSet NodeSet::operator()(std::string& path, const std::string& sep)
 std::vector<NodeXML*>& NodeSet::operator()()
 {
     return _set;
+}
+
+std::vector<NodeXML*>::iterator NodeSet::begin()
+{
+    return _set.begin();
+}
+
+std::vector<NodeXML*>::iterator NodeSet::end()
+{
+    return _set.end();
 }
 
 void NodeSet::addNode(NodeXML* node)

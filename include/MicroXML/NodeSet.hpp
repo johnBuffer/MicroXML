@@ -10,12 +10,14 @@ class NodeSet
 {
 public:
 
-    NodeXML* operator[](int i);
+    NodeXML& operator[](int i);
     NodeSet  operator[](const std::string& name);
     NodeSet  operator()(std::string& path, const std::string& sep);
     NodeSet  find(const std::string& name);
 
     std::vector<NodeXML*>& operator()();
+    std::vector<NodeXML*>::iterator begin();
+    std::vector<NodeXML*>::iterator end();
 
     void addNode(NodeXML* node);
     void addNodeSet(const NodeSet& nodeSet);

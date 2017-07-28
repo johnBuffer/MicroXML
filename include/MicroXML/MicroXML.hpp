@@ -1,9 +1,9 @@
-#ifndef PARSERXML_H_INCLUDED
-#define PARSERXML_H_INCLUDED
+#ifndef MicroXML_H_INCLUDED
+#define MicroXML_H_INCLUDED
 
 #include "NodeXML.hpp"
 
-class ParserXML
+class MicroXML
 {
 public:
     static NodeXML parse(std::string filename);
@@ -15,4 +15,4 @@ private:
     static std::string _defaultSeparator;
 };
 
-#endif // PARSERXML_H_INCLUDED
+#endif // MicroXML_H_INCLUDED

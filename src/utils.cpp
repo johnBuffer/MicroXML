@@ -1,4 +1,4 @@
-#include "utils.hpp"
+#include <MicroXML/utils.hpp>
 
 bool found(size_t pos)
 {
@@ -56,7 +56,7 @@ void parseDeclaration(const std::string& str, Tag& tag)
         tag._params[paramName] = paramData;
     }
 
-    if (tagName[0] == '/')
+    if (tagName.front() == '/')
     {
         tag._type = CLOSE;
         tagName  = tagName.substr(1);
@@ -98,11 +98,11 @@ Tag getNextTag(std::string& str, size_t start)
         }
         else if (tag._type == COMMENTED)
         {
-            pos2 = str.find("-->");
+            pos2 = str.find("-->")+2;
         }
 
         tag._isValid = true;
-        tag._pos     = pos2+2;
+        tag._pos     = pos2;
     }
     else
         tag._isValid = false;
