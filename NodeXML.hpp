@@ -19,12 +19,11 @@ public:
     void print() const;
     void setData(std::string data);
     void setParams(const StrMap& params);
-    void setDefaultSeparator(std::string sep);
 
     NodeXML*    addSubNode(std::string name);
     NodeSet     operator[](std::string nodeName);
     NodeSet     operator()(std::string path);
-    NodeSet     operator()(std::string path, std::string sep);
+    NodeSet     operator()(std::string path, const std::string& sep);
     std::string getName() const;
     std::string get(const std::string& param) const;
     NodeSet&    getNodeSet();
@@ -36,7 +35,6 @@ public:
 private:
     std::string _name;
     std::string _data;
-    std::string _defaultSeparator;
     NodeXML*    _topNode;
 
     NodeSet _subNodes;

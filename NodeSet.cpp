@@ -33,7 +33,7 @@ NodeSet NodeSet::operator[](const std::string& name)
     return result;
 }
 
-NodeSet NodeSet::operator()(std::string& path, std::string& sep)
+NodeSet NodeSet::operator()(std::string& path, const std::string& sep)
 {
     std::vector<std::string> nodes = split(path, sep);
 

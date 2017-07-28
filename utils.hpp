@@ -29,14 +29,13 @@ struct Tag
     bool    _isValid;
 };
 
-bool found(size_t pos);
+Tag         getNextTag(std::string& str, size_t start=0);
+bool        found(size_t pos);
+void        parseDeclaration(const std::string& str, Tag& tag);
+StrVec      split(const std::string& str, std::string sep);
+StrVec      splitQuote(const std::string& str, char sep);
+size_t      findFirst(const std::string& str, char c, size_t start=0);
 std::string purge(std::string& str);
-void parseDeclaration(const std::string& str, Tag& tag);
-Tag getNextTag(std::string& str, size_t start=0);
 
-StrVec split(const std::string& str, std::string sep);
-StrVec splitQuote(const std::string& str, char sep);
-
-size_t findFirst(const std::string& str, char c, size_t start=0);
 
 #endif // UTILS_HPP_INCLUDED

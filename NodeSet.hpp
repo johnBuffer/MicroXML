@@ -12,7 +12,7 @@ public:
 
     NodeXML* operator[](int i);
     NodeSet  operator[](const std::string& name);
-    NodeSet  operator()(std::string& path, std::string& sep);
+    NodeSet  operator()(std::string& path, const std::string& sep);
     NodeSet  find(const std::string& name);
 
     std::vector<NodeXML*>& operator()();

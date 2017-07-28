@@ -5,6 +5,8 @@
 
 #include "utils.hpp"
 
+std::string ParserXML::_defaultSeparator = ".";
+
 NodeXML ParserXML::parse(std::string filename)
 {
     NodeXML newNode("Root");
@@ -33,21 +35,34 @@ NodeXML ParserXML::parse(std::string filename)
                 stack.back()->setData(tag._data);
                 stack.pop_back();
             }
-            else
-            {
-                std::cout << "[WARNING] \"" << stack.back()->getName() << "\" not closed" << std::endl;
-            }
         }
         else if (tag._type != COMMENTED)
         {
-            NodeXML* newNode = stack.back()->addSubNode(tag._name);
-            if (tag._type == OPEN)
+            if (tag._type != SPECIAL)
+            {
+                NodeXML* newNode = stack.back()->addSubNode(tag._name);
                 stack.push_back(newNode);
-            newNode->setParams(tag._params);
+                newNode->setParams(tag._params);
+            }
         }
 
         tag = getNextTag(str, tag._pos+1);
     }
 
+    if (stack.size() > 1)
+    {
+        std::cout << "[WARNING] \"" << stack.back()->getName() << "\" not closed" << std::endl;
+    }
+
     return newNode;
+}
+
+void ParserXML::setDefaultSeparator(const std::string& separator)
+{
+    _defaultSeparator = separator;
+}
+
+const std::string& ParserXML::getDefaultSeparator()
+{
+    return _defaultSeparator;
 }

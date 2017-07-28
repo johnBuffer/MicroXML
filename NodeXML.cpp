@@ -1,17 +1,16 @@
 #include "NodeXML.hpp"
+#include "ParserXML.hpp"
 #include <iostream>
 
 NodeXML::NodeXML() :
     _name(""),
     _data(""),
-    _defaultSeparator("."),
     _topNode(nullptr)
 {}
 
 NodeXML::NodeXML(std::string name) :
     _name(name),
     _data(""),
-    _defaultSeparator("."),
     _topNode(nullptr)
 {}
 
@@ -33,11 +32,6 @@ NodeXML* NodeXML::addSubNode(std::string name)
     return _subNodes._set.back();
 }
 
-void NodeXML::setDefaultSeparator(std::string sep)
-{
-    _defaultSeparator = sep;
-}
-
 NodeSet NodeXML::operator[](std::string name)
 {
     NodeSet result;
@@ -49,10 +43,10 @@ NodeSet NodeXML::operator()(std::string path)
 {
     NodeSet result;
     result.addNode(this);
-    return result(path, _defaultSeparator);
+    return result(path, ParserXML::getDefaultSeparator());
 }
 
-NodeSet NodeXML::operator()(std::string path, std::string sep)
+NodeSet NodeXML::operator()(std::string path, const std::string& sep)
 {
     NodeSet result;
     result.addNode(this);
