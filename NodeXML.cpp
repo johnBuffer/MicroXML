@@ -21,6 +21,11 @@ void NodeXML::setData(std::string data)
     _data = data;
 }
 
+void NodeXML::setParams(const std::map<std::string, std::string>& params)
+{
+    _params = params;
+}
+
 void NodeXML::addSubNode(std::string name)
 {
     _subNodes[name] = NodeXML(name);
@@ -97,6 +102,11 @@ int NodeXML::asInt() const
 double NodeXML::asDouble() const
 {
     return std::stod(_data);
+}
+
+std::string NodeXML::get(const std::string& param) const
+{
+    return _params.at(param);
 }
 
 std::string NodeXML::asString() const

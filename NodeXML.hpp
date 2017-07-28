@@ -14,6 +14,7 @@ public:
 
     void print() const;
     void setData(std::string data);
+    void setParams(const std::map<std::string, std::string>& params);
     void addSubNode(std::string name);
     void setDefaultSeparator(std::string sep);
 
@@ -22,6 +23,7 @@ public:
     NodeXML&              operator()(std::string path);
     NodeXML&              operator()(std::string path, std::string sep);
     std::vector<NodeXML*> getSubNodes();
+    std::string           get(const std::string& param) const;
 
     int asInt()            const;
     double asDouble()      const;
@@ -31,9 +33,10 @@ private:
     std::string _name;
     std::string _data;
     std::string _defaultSeparator;
-
     NodeXML*    _topNode;
+
     std::map<std::string, NodeXML> _subNodes;
+    std::map<std::string, std::string> _params;
 
     void print(std::string indent) const;
 };

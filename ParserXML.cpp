@@ -12,8 +12,7 @@ NodeXML ParserXML::parse(std::string filename)
     std::ifstream infile(filename);
     std::list<NodeXML*> stack;
 
-    std::string str;
-    std::string line;
+    std::string str, line;
     while (std::getline(infile, line))
     {
         str += line;
@@ -37,6 +36,7 @@ NodeXML ParserXML::parse(std::string filename)
         {
             stack.back()->addSubNode(tag._name);
             stack.push_back(&(*stack.back())[tag._name]);
+            stack.back()->setParams(tag._params);
         }
 
         tag = getNextTag(str);
