@@ -4,20 +4,15 @@ int main()
 {
     NodeXML root = MicroXML::parse("test.xml");
 
-    NodeSet genres    = root["catalog"]["book"]["genre"];
+    NodeSet authors    = root["catalog"]["book"]["author"];
     NodeSet genresBis = root("catalog.book.genre");
 
-    for (auto node : genres)
+    for (auto node : authors)
     {
         std::cout << node->asString() << std::endl;
     }
 
     std::cout << std::endl;
-
-    for (auto node : genresBis)
-    {
-        std::cout << node->asString() << std::endl;
-    }
 
     return 0;
 }

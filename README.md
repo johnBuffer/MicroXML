@@ -45,15 +45,28 @@ Giving the following XML file named books.xml (from https://msdn.microsoft.com/e
 
 MicroXML is able to read it and allows you to easily access its contents.
 
-For instance, these few lines are all you need to retrieve the width of the of the Zombie's texture :
+For instance, these few lines are all you need to retrieve all the authors mentioned in the file :
 
 ```c++
 // First parse the file
-NodeXML root = ParserXML::parse("test");
+NodeXML root = ParserXML::parse("books.xml");
 
-// Access your data as an int
-int width = root["Zombie"]["Texture"]["Size"]["Width"].asInt();
+// Access your data
+NodeSet authors = root["catalog"]["book"]["author"];
+
+// View the data
+for (auto node : authors)
+{
+	std::cout << node->asString() << std::endl;
+}
 ```
+
+```
+Gambardella, Matthew
+Ralls, Kim
+Corets, Eva
+```
+
 
 As you can see, access requests are simple but still tedious to write.
 MicroXML provides an easier way to write this request using strings -> based on the Scalpl project (https://github.com/ducdetronquito/scalpl) :+1: :+1: :+1:
