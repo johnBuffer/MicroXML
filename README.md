@@ -95,7 +95,7 @@ Some tags have attributes:
 ```xml
 <book id="bk101">
 ```
-To access them you can use the ["attribute_name"]
+To access them you can use this synatx: ["attribute_name"]
 ```c++
 NodeSet books = root("catalog/book");
 for (auto node : books)
