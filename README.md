@@ -57,7 +57,7 @@ NodeSet authors = root("catalog")("book")("author");
 // View the data
 for (auto node: authors)
 {
-	std::cout << node->asString() << std::endl;
+  std::cout << node->asString() << std::endl;
 }
 ```
 Output:
@@ -76,7 +76,7 @@ NodeSet authorsBis = root("catalog.book.author");
 
 for (auto node : authorsBis)
 {
-	std::cout << node->asString() << std::endl;
+  std::cout << node->asString() << std::endl;
 }
 
 // You can combine both
@@ -100,7 +100,7 @@ To access them you can use the ["attribute_name"]
 NodeSet books = root("catalog/book");
 for (auto node : books)
 {
-	std::cout << node["id"] << std::endl;
+  std::cout << node["id"] << std::endl;
 }
 ```
 
