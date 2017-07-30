@@ -114,3 +114,9 @@ for (auto node : books)
     std::cout << node["id"] << std::endl;
 }
 ```
+Output:
+```
+bk101
+bk102
+bk103
+```
