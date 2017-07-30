@@ -82,12 +82,12 @@ void NodeXML::print(std::string indent) const
 
 int NodeXML::asInt() const
 {
-    return std::stoi(_data);
+    return strToInt(_data);
 }
 
 double NodeXML::asDouble() const
 {
-    return std::stod(_data);
+    return strToDouble(_data);
 }
 
 std::string NodeXML::get(const std::string& attr) const

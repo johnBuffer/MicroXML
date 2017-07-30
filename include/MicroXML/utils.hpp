@@ -30,6 +30,8 @@ struct Tag
 };
 
 Tag         getNextTag(std::string& str, size_t start=0);
+int         strToInt(const std::string& str);
+double      strToDouble(const std::string& str);
 bool        found(size_t pos);
 void        parseDeclaration(const std::string& str, Tag& tag);
 StrVec      split(const std::string& str, std::string sep);

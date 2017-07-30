@@ -162,3 +162,39 @@ std::vector<std::string> splitQuote(const std::string& str, char sep)
 
     return result;
 }
+
+int strToInt(const std::string& str)
+{
+    int result = 0;
+
+    for (const char& c : str)
+    {
+        if (c >= '0' && c <= '9')
+            result = result*10 + (c-'0');
+        else
+            break;
+    }
+
+    return result;
+}
+
+double strToDouble(const std::string& str)
+{
+    double div = 1.0;
+    double result = 0.0;
+
+    for (const char& c : str)
+    {
+        if (c >= '0' && c <= '9')
+        {
+            result = result*10 + (c-'0');
+            div *= div>1 ? 10 : 1;
+        }
+        else if (c == '.' && div == 1)
+            div = 10.0;
+        else
+            break;
+    }
+
+    return 10.0*result/div;
+}
