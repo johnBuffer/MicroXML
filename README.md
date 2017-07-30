@@ -4,7 +4,7 @@
 
 MicroXML is a very lightweight (but strong:ant:) C++ dependence-free XML parsing librairy.
 
-## Exemple
+## How to use MicroXML
 
 Giving the following XML file named books.xml (from https://msdn.microsoft.com/en-us/library/ms762271(v=vs.85).aspx): 
 
