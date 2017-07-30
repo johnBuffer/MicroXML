@@ -43,6 +43,7 @@ Giving the following XML file named books.xml (from https://msdn.microsoft.com/e
 </catalog>
 ```
 
+### Parse and explore data
 MicroXML is able to read it and allows you to easily access its contents.
 
 For instance, these few lines are all you need to retrieve all the authors mentioned in the file:
@@ -67,6 +68,7 @@ Ralls, Kim
 Corets, Eva
 ```
 
+### Alternative syntax
 As you can see, access requests are simple but still tedious to write.
 MicroXML provides an easier way to write this request using strings -> inspired by the Scalpl project (https://github.com/ducdetronquito/scalpl) :+1: :+1: :+1:
 
@@ -97,6 +99,8 @@ Tags like <author> just stores data
 ```
 These data can be reached using the asString, asInt or asDouble methode exposed by NodeXML. It will return the choosen conversion of the string inside the tag. 
 If int or double conversion fail, 0 will be returned.
+
+### Attributes
 
 Some tags have attributes:
 ```xml
