@@ -68,7 +68,7 @@ Corets, Eva
 ```
 
 As you can see, access requests are simple but still tedious to write.
-MicroXML provides an easier way to write this request using strings -> based on the Scalpl project (https://github.com/ducdetronquito/scalpl) :+1: :+1: :+1:
+MicroXML provides an easier way to write this request using strings -> inspired by the Scalpl project (https://github.com/ducdetronquito/scalpl) :+1: :+1: :+1:
 
 ```c++
 // Same request using brackets
