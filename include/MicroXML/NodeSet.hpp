@@ -15,9 +15,9 @@ struct NodePtr
 
     NodeSet     operator()(const std::string& name);
     NodeXML&    operator*()  {return *_node;}
-    NodeXML*    operator->() {return _node;}
     std::string operator[](const std::string& attr);
 
+    NodeXML*       operator->() {return _node;}
     const NodeXML* operator->() const {return _node;}
 
     NodeXML* _node;

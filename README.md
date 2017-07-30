@@ -57,7 +57,7 @@ NodeSet authors = root("catalog")("book")("author");
 // View the data
 for (auto node: authors)
 {
-  std::cout << node->asString() << std::endl;
+    std::cout << node->asString() << std::endl;
 }
 ```
 Output:
@@ -76,7 +76,7 @@ NodeSet authorsBis = root("catalog.book.author");
 
 for (auto node : authorsBis)
 {
-  std::cout << node->asString() << std::endl;
+    std::cout << node->asString() << std::endl;
 }
 
 // You can combine both
@@ -91,6 +91,13 @@ MicroXML::setDefaultSeparator("/");
 authorsBis = root("catalog/book/author");
 ```
 
+Tags like <author> just stores data
+```XML
+<author>Ralls, Kim</author>
+```
+These data can be reached using the asString, asInt or asDouble methode exposed by NodeXML. It will return the choosen conversion of the string inside the tag. 
+If int or double conversion fail, 0 will be returned.
+
 Some tags have attributes:
 ```xml
 <book id="bk101">
@@ -100,7 +107,6 @@ To access them you can use this synatx: ["attribute_name"]
 NodeSet books = root("catalog/book");
 for (auto node : books)
 {
-  std::cout << node["id"] << std::endl;
+    std::cout << node["id"] << std::endl;
 }
 ```
-
