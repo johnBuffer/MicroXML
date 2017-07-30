@@ -68,7 +68,7 @@ Ralls, Kim
 Corets, Eva
 ```
 
-Tags like <author> just stores data
+Tags like author just stores data
 ```XML
 <author>Ralls, Kim</author>
 ```
