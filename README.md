@@ -77,7 +77,7 @@ If int or double conversion fail, 0 will be returned.
 
 ### Alternative syntax
 As you can see, access requests are simple but still tedious to write.
-MicroXML provides an easier way to write this request using strings -> inspired by the Scalpl project (https://github.com/ducdetronquito/scalpl) :+1: :+1: :+1:
+MicroXML provides an easier way to write this request using strings :point_right: inspired by the Scalpl project (https://github.com/ducdetronquito/scalpl) :+1: :+1: :+1:
 
 ```c++
 // Same request using brackets
