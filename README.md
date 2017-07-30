@@ -68,6 +68,13 @@ Ralls, Kim
 Corets, Eva
 ```
 
+Tags like <author> just stores data
+```XML
+<author>Ralls, Kim</author>
+```
+These data can be reached using the asString, asInt or asDouble methode exposed by NodeXML. It will return the choosen conversion of the string inside the tag. 
+If int or double conversion fail, 0 will be returned.
+
 ### Alternative syntax
 As you can see, access requests are simple but still tedious to write.
 MicroXML provides an easier way to write this request using strings -> inspired by the Scalpl project (https://github.com/ducdetronquito/scalpl) :+1: :+1: :+1:
@@ -92,13 +99,6 @@ MicroXML::setDefaultSeparator("/");
 
 authorsBis = root("catalog/book/author");
 ```
-
-Tags like <author> just stores data
-```XML
-<author>Ralls, Kim</author>
-```
-These data can be reached using the asString, asInt or asDouble methode exposed by NodeXML. It will return the choosen conversion of the string inside the tag. 
-If int or double conversion fail, 0 will be returned.
 
 ### Attributes
 
