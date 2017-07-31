@@ -73,7 +73,7 @@ Tags like author just stores data
 <author>Ralls, Kim</author>
 ```
 These data can be reached using the asString, asInt or asDouble methode exposed by NodeXML. It will return the choosen conversion of the string inside the tag. 
-If int or double conversion fail, 0 will be returned.
+If int or double conversion fails, 0 will be returned.
 
 ### Alternative syntax
 As you can see, access requests are simple but still tedious to write.
