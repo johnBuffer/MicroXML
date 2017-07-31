@@ -10,6 +10,8 @@
 #include "NodeSet.hpp"
 #include "utils.hpp"
 
+/* Stores all the XML elements - surrounded by tags */
+
 class NodeXML
 {
 public:
@@ -30,7 +32,7 @@ public:
     NodeSet operator()(std::string path);
     NodeSet operator()(std::string path, const std::string& sep);
 
-    /// Adds a sub node
+    /// Creates and adds a sub node
     NodeXML* addSubNode(std::string name);
 
     /// Returns all sub nodes

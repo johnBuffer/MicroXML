@@ -21,7 +21,7 @@ NodeSet NodeSet::find(const std::string& name)
 {
     NodeSet result;
 
-    for (NodePtr node : _set)
+    for (NodePtr& node : _set)
     {
         if (node->getName().compare(name) == 0)
             result._set.push_back(node);
@@ -34,7 +34,7 @@ StrVec NodeSet::operator[](const std::string& attr)
 {
     StrVec result;
 
-    for (NodePtr node : _set)
+    for (NodePtr& node : _set)
     {
         result.push_back(node[attr]);
     }
@@ -85,6 +85,16 @@ std::vector<NodePtr>::iterator NodeSet::begin()
 }
 
 std::vector<NodePtr>::iterator NodeSet::end()
+{
+    return _set.end();
+}
+
+std::vector<NodePtr>::const_iterator NodeSet::begin() const
+{
+    return _set.begin();
+}
+
+std::vector<NodePtr>::const_iterator NodeSet::end() const
 {
     return _set.end();
 }
