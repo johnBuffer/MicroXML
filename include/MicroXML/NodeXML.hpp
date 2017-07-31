@@ -13,34 +13,54 @@
 class NodeXML
 {
 public:
+    /// Constructors
     NodeXML();
     NodeXML(std::string name);
 
+    /// Shows sub nodes
     void print() const;
+
+    /// Changes node's data
     void setData(std::string data);
-    void setParams(const StrMap& params);
 
-    NodeSet     operator()(std::string path);
-    NodeSet     operator()(std::string path, const std::string& sep);
-    NodeXML*    addSubNode(std::string name);
-    NodeSet&    getNodeSet();
+    /// Changes node's attributes
+    void setAttr(const StrMap& attr);
 
+    /// Different exploration methods
+    NodeSet operator()(std::string path);
+    NodeSet operator()(std::string path, const std::string& sep);
+
+    /// Adds a sub node
+    NodeXML* addSubNode(std::string name);
+
+    /// Returns all sub nodes
+    NodeSet& getNodeSet();
+
+    /// Access an attribute by its name
     std::string operator[](std::string attr);
-    std::string  getName() const;
-    std::string  get(const std::string& param) const;
+    std::string get(const std::string& attr) const;
 
+    /// Return node's name
+    std::string getName() const;
+
+    /// Return node's data casted into desired type
     int         asInt()    const;
     double      asDouble() const;
     std::string asString() const;
 
 private:
+    /// Node's name
     std::string _name;
+    /// Node's data
     std::string _data;
-    NodeXML*    _topNode;
-
+    /// Parent node
+    NodeXML* _topNode;
+    /// Sub nodes
     NodeSet _subNodes;
-    StrMap  _params;
+    /// Attributes
+    StrMap  _attr;
 
+    /// Recursive call of print, for indent
     void print(std::string indent) const;
 };
 

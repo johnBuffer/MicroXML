@@ -41,7 +41,7 @@ NodeXML MicroXML::parse(std::string filename)
             {
                 NodeXML* newNode = stack.back()->addSubNode(tag._name);
                 stack.push_back(newNode);
-                newNode->setParams(tag._params);
+                newNode->setAttr(tag._params);
             }
         }
 

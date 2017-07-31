@@ -10,8 +10,7 @@ size_t findFirst(const std::string& str, char c, size_t start)
     size_t strSize = str.size();
     for (size_t i(start); i<strSize; ++i)
     {
-        if (str[i] == c)
-            return i;
+        if (str[i] == c) return i;
     }
 
     return std::string::npos;
@@ -138,7 +137,6 @@ std::vector<std::string> split(const std::string& str, std::string sep)
 std::vector<std::string> splitQuote(const std::string& str, char sep)
 {
     std::vector<std::string> result;
-
     std::string strcp(str+' ');
 
     bool   inQuote = false;
