@@ -5,13 +5,12 @@ int main()
     MicroXML::setDefaultSeparator(".");
     NodeXML root = MicroXML::parse("test.xml");
 
-    NodeSet authors   = root("catalog")("book/title", "/");
+    NodeSet authors   = root("catalog")("book", "/");
     NodeSet genresBis = root("catalog.book");
 
-    for (auto node : genresBis)
-    {
-        std::cout << node["id"] << std::endl;
-    }
+    root.print();
+
+    root.saveToFile("test.test");
 
     std::cout << std::endl;
 

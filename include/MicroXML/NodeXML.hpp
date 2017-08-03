@@ -6,6 +6,7 @@
 #include <vector>
 #include <list>
 #include <iostream>
+#include <fstream>
 
 #include "NodeSet.hpp"
 #include "utils.hpp"
@@ -23,23 +24,23 @@ public:
     void print() const;
 
     /// Changes node's data
-    void setData(std::string data);
+    void setData(const std::string& data);
 
     /// Changes node's attributes
     void setAttr(const StrMap& attr);
 
     /// Different exploration methods
-    NodeSet operator()(std::string path);
-    NodeSet operator()(std::string path, const std::string& sep);
+    NodeSet operator()(const std::string& path);
+    NodeSet operator()(const std::string& path, const std::string& sep);
 
     /// Creates and adds a sub node
-    NodeXML* addSubNode(std::string name);
+    NodeXML* addSubNode(const std::string& name);
 
     /// Returns all sub nodes
     NodeSet& getNodeSet();
 
     /// Access an attribute by its name
-    std::string operator[](std::string attr);
+    std::string operator[](const std::string& attr);
     std::string get(const std::string& attr) const;
 
     /// Return node's name
@@ -49,6 +50,8 @@ public:
     int         asInt()    const;
     double      asDouble() const;
     std::string asString() const;
+
+    void saveToFile(const std::string& filename) const;
 
 private:
     /// Node's name
@@ -63,7 +66,9 @@ private:
     StrMap  _attr;
 
     /// Recursive call of print, for indent
-    void print(std::string indent) const;
+    void _print(std::string indent) const;
+
+    void _saveToFile(std::ofstream& file, const std::string indent) const;
 };
 
 #endif // NODEXML_HPP_INCLUDED

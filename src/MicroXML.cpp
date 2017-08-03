@@ -22,7 +22,6 @@ NodeXML MicroXML::parse(std::string filename)
 
     std::string str, line;
     while (std::getline(infile, line)) {str += line;}
-    str = purge(str);
 
     Tag tag = getNextTag(str);
     while (tag._isValid)

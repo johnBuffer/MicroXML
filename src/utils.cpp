@@ -29,7 +29,7 @@ std::string purge(std::string& str)
         {
             if (!quoted)
             {
-                if (c != '\n' && c != '\r' && c != '\t')
+                //if (c != '\n' && c != '\r' && c != '\t')
                     result += c;
             }
             else
@@ -55,20 +55,20 @@ void parseDeclaration(const std::string& str, Tag& tag)
         tag._params[paramName] = paramData;
     }
 
-    if (tagName.front() == '/')
+    if (tagName.front() == XML_SLASH)
     {
         tag._type = CLOSE;
         tagName  = tagName.substr(1);
     }
-    else if (str.back() == '/')
+    else if (str.back() == XML_SLASH)
     {
         tag._type = AUTO_CLOSED;
     }
-    else if (tagName.compare("?xml") == 0)
+    else if (tagName.compare(XML_DOCUMENT_HEADER) == 0)
     {
         tag._type = SPECIAL;
     }
-    else if (tagName.compare("!--") == 0)
+    else if (tagName.compare(XML_COMMENT_START) == 0)
     {
         tag._type = COMMENTED;
     }
@@ -82,8 +82,8 @@ Tag getNextTag(std::string& str, size_t start)
 {
     Tag tag;
 
-    size_t pos1 = findFirst(str, '<', start);
-    size_t pos2 = findFirst(str, '>', pos1);
+    size_t pos1 = findFirst(str, XML_TAG_START, start);
+    size_t pos2 = findFirst(str, XML_TAG_END  , pos1);
     if (found(pos1) && found(pos2))
     {
         size_t length = pos2-pos1-1;
@@ -97,7 +97,7 @@ Tag getNextTag(std::string& str, size_t start)
         }
         else if (tag._type == COMMENTED)
         {
-            pos2 = str.find("-->")+2;
+            pos2 = str.find(XML_COMMENT_END)+2;
         }
 
         tag._isValid = true;

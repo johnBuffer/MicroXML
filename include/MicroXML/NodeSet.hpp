@@ -30,16 +30,16 @@ struct NodePtr
 class NodeSet
 {
 public:
-    /// Return the i th elements
+    /// Return the i th element
     NodeXML& operator[](int i);
 
     /// Return an attribute of all the elements
-    StrVec   operator[](const std::string& attr);
+    StrVec operator[](const std::string& attr);
 
     /// Exploration
-    NodeSet  operator()(const std::string& path);
-    NodeSet  operator()(const std::string& path, const std::string& sep);
-    NodeSet  find(const std::string& name);
+    NodeSet operator()(const std::string& path);
+    NodeSet operator()(const std::string& path, const std::string& sep);
+    NodeSet find(const std::string& name);
 
     /// Return all nodes
     std::vector<NodePtr>& operator()();

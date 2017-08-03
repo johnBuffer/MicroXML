@@ -9,6 +9,14 @@
 typedef std::vector<std::string>           StrVec;
 typedef std::map<std::string, std::string> StrMap;
 
+const char XML_SLASH     = '/';
+const char XML_TAG_START = '<';
+const char XML_TAG_END   = '>';
+
+const std::string XML_DOCUMENT_HEADER = "?xml";
+const std::string XML_COMMENT_START   = "!--";
+const std::string XML_COMMENT_END     = "-->";
+
 enum TagType
 {
     OPEN,

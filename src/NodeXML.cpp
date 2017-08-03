@@ -16,9 +16,10 @@ NodeXML::NodeXML(std::string name) :
 {}
 
 /// Changes node's data
-void NodeXML::setData(std::string data)
+void NodeXML::setData(const std::string& data)
 {
     _data = data;
+    while (_data.front() == ' ') _data = _data.substr(1);
 }
 
 /// Set attributes
@@ -28,7 +29,7 @@ void NodeXML::setAttr(const std::map<std::string, std::string>& attr)
 }
 
 /// Creates and adds a sub node
-NodeXML* NodeXML::addSubNode(std::string name)
+NodeXML* NodeXML::addSubNode(const std::string& name)
 {
     NodeXML* newNode = new NodeXML(name);
     _subNodes.addNode(newNode);
@@ -38,7 +39,7 @@ NodeXML* NodeXML::addSubNode(std::string name)
 }
 
 /// Access an attribute by its name
-std::string NodeXML::operator[](std::string attr)
+std::string NodeXML::operator[](const std::string& attr)
 {
     return get(attr);
 }
@@ -51,14 +52,14 @@ std::string NodeXML::get(const std::string& attr) const
 }
 
 /// Different exploration methods
-NodeSet NodeXML::operator()(std::string path)
+NodeSet NodeXML::operator()(const std::string& path)
 {
     NodeSet result;
     result.addNode(this);
     return result(path, MicroXML::getDefaultSeparator());
 }
 
-NodeSet NodeXML::operator()(std::string path, const std::string& sep)
+NodeSet NodeXML::operator()(const std::string& path, const std::string& sep)
 {
     NodeSet result;
     result.addNode(this);
@@ -79,10 +80,11 @@ NodeSet& NodeXML::getNodeSet()
 
 void NodeXML::print() const
 {
-    print("");
+    _print("");
 }
 
-void NodeXML::print(std::string indent) const
+/// Displays the node and its sub nodes
+void NodeXML::_print(std::string indent) const
 {
     std::cout << indent << "+"+_name;
     if (!_data.empty())
@@ -90,7 +92,7 @@ void NodeXML::print(std::string indent) const
     std::cout << std::endl;
 
     for (auto& node : _subNodes)
-        node->print(indent+"  ");
+        node->_print(indent+"  ");
 
     std::cout << indent << "-"+_name << std::endl;
 }
@@ -109,4 +111,32 @@ double NodeXML::asDouble() const
 std::string NodeXML::asString() const
 {
     return _data;
+}
+
+void NodeXML::saveToFile(const std::string& filename) const
+{
+    std::ofstream outputFile(filename);
+    _saveToFile(outputFile, "");
+}
+
+void NodeXML::_saveToFile(std::ofstream& file, const std::string indent) const
+{
+    std::string declaration = "<" + _name;
+
+    for (auto attr : _attr)
+    {
+        declaration += " " + attr.first + "=\"" + attr.second+"\"";
+    }
+
+    declaration += ">";
+
+    file << indent << declaration << std::endl;
+
+    if (!_data.empty())
+        file << indent+"    " << _data << std::endl;
+
+    for (auto& node : _subNodes)
+        node->_saveToFile(file, indent+"    ");
+
+    file << indent <<  "</"+_name+">" << std::endl;
 }
